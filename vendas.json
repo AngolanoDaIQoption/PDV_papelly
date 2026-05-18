@@ -1,0 +1,39 @@
+[
+  {
+    "id_venda": 1779131503765,
+    "total": 17.5,
+    "metodo": "pix",
+    "data": "2026-05-18T19:11:43.765Z",
+    "itens": [
+      {
+        "id": 5,
+        "codigo_barras": "67",
+        "nome": "Cartolina",
+        "preco": 2.5,
+        "quantidade": 3
+      },
+      {
+        "id": 6,
+        "codigo_barras": "69",
+        "nome": "Impressão",
+        "preco": 2,
+        "quantidade": 5
+      }
+    ]
+  },
+  {
+    "id_venda": 1779131889273,
+    "total": 25,
+    "metodo": "dinheiro",
+    "data": "2026-05-18T19:18:09.273Z",
+    "itens": [
+      {
+        "id": 5,
+        "codigo_barras": "67",
+        "nome": "Cartolina",
+        "preco": 2.5,
+        "quantidade": 10
+      }
+    ]
+  }
+]

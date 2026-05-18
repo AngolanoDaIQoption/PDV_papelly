@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "codigo_barras": "789123456",
+    "nome": "Camiseta Preta Básica",
+    "preco": 49.9
+  },
+  {
+    "id": 2,
+    "codigo_barras": "789654321",
+    "nome": "Boné Aba Reta",
+    "preco": 35
+  },
+  {
+    "id": 3,
+    "codigo_barras": "123",
+    "nome": "Refrigerante Lata",
+    "preco": 5.5
+  },
+  {
+    "id": 4,
+    "codigo_barras": "456",
+    "nome": "Salgado Assado",
+    "preco": 7
+  },
+  {
+    "id": 5,
+    "codigo_barras": "67",
+    "nome": "Cartolina",
+    "preco": 2.5
+  },
+  {
+    "id": 6,
+    "codigo_barras": "69",
+    "nome": "Impressão",
+    "preco": 2
+  },
+  {
+    "id": 7,
+    "codigo_barras": "420",
+    "nome": "Impressão colorida",
+    "preco": 3
+  }
+]
