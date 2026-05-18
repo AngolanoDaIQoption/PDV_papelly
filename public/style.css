@@ -1,0 +1,509 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+.navbar {
+  background-color: #1e293b;
+  color: #fff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.badge {
+  font-size: 0.6em;
+  background-color: #10b981;
+  padding: 4px 8px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Painel Esquerdo */
+.busca-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.busca-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.busca-container input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
+  border: 2px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+}
+
+.busca-container input:focus {
+  border-color: #3b82f6;
+}
+
+.tabela-container {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background-color: #f8fafc;
+  color: #64748b;
+}
+
+.btn-deletar {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Painel Direito */
+.total-card {
+  background: #3b82f6;
+  color: white;
+  text-align: center;
+}
+
+.valor-total {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+select,
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.flex-input {
+  margin-bottom: 15px;
+}
+
+.troco-resultado {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  padding-top: 10px;
+  border-top: 2px dashed #e2e8f0;
+}
+
+.btn-sucesso {
+  width: 100%;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-sucesso:hover {
+  background-color: #059669;
+}
+
+/* Wrapper para posicionamento relativo */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Container do Dropdown Customizado */
+.dropdown-custom {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+/* Classe para esconder o dropdown quando não houver busca */
+.dropdown-custom.hidden {
+  display: none;
+}
+
+/* Cada linha de produto dentro do dropdown */
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.2s;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+  border-radius: 0 0 6px 6px;
+}
+
+/* Efeito de passar o mouse por cima */
+.dropdown-item:hover {
+  background-color: #f8fafc;
+}
+
+.item-nome {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+/* Badge com o preço do produto */
+.item-preco {
+  font-size: 0.9em;
+  color: #10b981;
+  font-weight: bold;
+  background: #ecfdf5;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* --- ESTILOS DAS ABAS DE NAVEGAÇÃO --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.tabs-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.tab-btn {
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: #fff;
+  background-color: #334155;
+}
+
+.tab-btn.active {
+  color: #fff;
+  background-color: #3b82f6;
+}
+
+/* Classe utilitária para esconder elementos */
+.hidden {
+  display: none !important;
+}
+
+/* --- ESTILOS DA TELA DE CADASTRO --- */
+.container-cadastro {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.form-card h2 {
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+
+.form-subtitulo {
+  color: #64748b;
+  font-size: 0.95em;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #475569;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+  border: 2px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #3b82f6;
+}
+
+/* --- ESTILOS DA TELA DE RELATÓRIO --- */
+.container-relatorio {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.grid-relatorio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card-mini {
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-mini h4 {
+  font-size: 0.9em;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+
+.card-mini p {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+/* Cores temáticas para identificação rápida */
+.card-mini.dinheiro {
+  background-color: #10b981;
+}
+.card-mini.pix {
+  background-color: #06b6d4;
+}
+.card-mini.cartao {
+  background-color: #f59e0b;
+}
+
+.total-geral-caixa {
+  margin-top: 30px;
+  text-align: center;
+  padding: 25px;
+  background-color: #1e293b;
+  color: white;
+  border-radius: 8px;
+}
+
+.total-geral-caixa h1 {
+  font-size: 3em;
+  color: #10b981;
+  margin-top: 10px;
+}
+/* --- ESTILOS DAS SUB-ABAS (INTERNAS) --- */
+.sub-tabs-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: #e2e8f0;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.sub-tab-btn {
+  flex: 1;
+  background: transparent;
+  color: #475569;
+  border: none;
+  padding: 10px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.sub-tab-btn:hover {
+  background-color: #cbd5e1;
+}
+
+.sub-tab-btn.active {
+  background-color: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão de Edição na Tabela */
+.btn-editar {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.btn-editar:hover {
+  background: #d97706;
+}
+/* --- ESTILOS DO MODAL CUSTOMIZADO --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.5); /* Fundo escuro sutil */
+  backdrop-filter: blur(4px); /* Desfoca o fundo do sistema */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-card-box {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: abrirModalSuave 0.2s ease-out;
+}
+
+@keyframes abrirModalSuave {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-card-box h3 {
+  color: #1e293b;
+  font-size: 1.25em;
+  margin-bottom: 8px;
+}
+
+.modal-card-box p {
+  color: #64748b;
+  font-size: 0.95em;
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+
+.modal-botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.modal-botoes button {
+  padding: 10px 18px;
+  font-size: 0.95em;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-secundario {
+  background: #e2e8f0;
+  color: #475569;
+  transition: background 0.2s;
+}
+
+.btn-secundario:hover {
+  background: #cbd5e1;
+}
+/* Garante que o input de quantidade dentro da tabela fique compacto e centralizado */
+.input-qtd-tabela {
+  width: 70px !important;
+  padding: 6px !important;
+  margin: 0 !important;
+  text-align: center;
+  font-weight: bold;
+}
+/* Torna as linhas do histórico de vendas clicáveis e adiciona efeito hover */
+#tabela-vendas-detalhes tbody tr {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#tabela-vendas-detalhes tbody tr:hover {
+  background-color: #f1f5f9;
+}

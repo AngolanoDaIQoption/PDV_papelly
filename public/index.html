@@ -1,1 +1,307 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Papelly - Frente de Caixa</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <h1>Papelly <span class="badge">PDV Local</span></h1>
+      <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="aba-caixa">
+          🛒 Frente de Caixa
+        </button>
+        <button class="tab-btn" data-tab="aba-cadastro">
+          📦 Cadastrar Itens
+        </button>
+        <button class="tab-btn" data-tab="aba-relatorio">📊 Fechamento</button>
+      </nav>
+    </header>
 
+    <main class="container-relatorio hidden" id="aba-relatorio">
+      <div class="card card-fechamento">
+        <h2>📊 Fechamento de Caixa Diário</h2>
+        <p class="form-subtitulo">
+          Confira os valores totais movimentados no dia de hoje.
+        </p>
+
+        <div class="grid-relatorio">
+          <div class="card-mini dinheiro">
+            <h4>💵 Total Dinheiro</h4>
+            <p id="rep-dinheiro">R$ 0,00</p>
+          </div>
+          <div class="card-mini pix">
+            <h4>⚡ Total Pix</h4>
+            <p id="rep-pix">R$ 0,00</p>
+          </div>
+          <div class="card-mini cartao">
+            <h4>💳 Total Cartão</h4>
+            <p id="rep-cartao">R$ 0,00</p>
+          </div>
+        </div>
+
+        <div class="total-geral-caixa">
+          <h3>Faturamento Total Acumulado</h3>
+          <h1 id="rep-total-geral">R$ 0,00</h1>
+        </div>
+
+        <div
+          class="card"
+          style="
+            margin-top: 30px;
+            box-shadow: none;
+            border: 1px solid #e2e8f0;
+            padding: 0;
+          "
+        >
+          <div style="padding: 20px 20px 0 20px">
+            <h3>📋 Transações Individuais</h3>
+            <p class="form-subtitulo" style="margin-bottom: 15px">
+              Listagem cronológica de todas as vendas do dia.
+            </p>
+          </div>
+          <div
+            class="tabela-container"
+            style="box-shadow: none; border-radius: 0 0 8px 8px"
+          >
+            <table id="tabela-vendas-detalhes">
+              <thead>
+                <tr>
+                  <th>Nº Venda</th>
+                  <th>Horário</th>
+                  <th>Forma Pago</th>
+                  <th>Valor Total</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <main class="container" id="aba-caixa">
+      <section class="painel-venda">
+        <div class="busca-container">
+          <label for="busca-produto">Buscar Produto (Código ou Nome):</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="busca-produto"
+              placeholder="Ex: 789123456 ou Camiseta"
+              autocomplete="off"
+              autofocus
+            />
+            <div id="dropdown-custom" class="dropdown-custom hidden"></div>
+          </div>
+        </div>
+
+        <div class="tabela-container">
+          <table id="tabela-carrinho">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Produto</th>
+                <th>Qtd</th>
+                <th>Preço Unit.</th>
+                <th>Total</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="painel-pagamento">
+        <div class="card total-card">
+          <h3>Total da Venda</h3>
+          <p class="valor-total" id="total-venda">R$ 0,00</p>
+        </div>
+
+        <div class="card">
+          <h3>Forma de Pagamento</h3>
+          <select id="forma-pagamento">
+            <option value="dinheiro">Dinheiro</option>
+            <option value="pix">Pix</option>
+            <option value="cartao">Cartão de Crédito/Débito</option>
+          </select>
+        </div>
+
+        <div class="card" id="secao-troco">
+          <h3>Cálculo de Troco</h3>
+          <div class="flex-input">
+            <label>Valor Recebido:</label>
+            <input
+              type="number"
+              id="valor-recebido"
+              step="0.01"
+              placeholder="R$ 0,00"
+            />
+          </div>
+          <div class="troco-resultado">
+            <span>Troco:</span>
+            <strong id="valor-troco">R$ 0,00</strong>
+          </div>
+        </div>
+
+        <button id="btn-finalizar" class="btn-sucesso">
+          Finalizar Venda (F8)
+        </button>
+      </section>
+    </main>
+
+    <main class="container-cadastro hidden" id="aba-cadastro">
+      <div class="sub-tabs-nav">
+        <button class="sub-tab-btn active" data-subtab="sub-aba-formulario">
+          📝 Novo Produto
+        </button>
+        <button class="sub-tab-btn" data-subtab="sub-aba-estoque">
+          📋 Ver Estoque
+        </button>
+      </div>
+
+      <div id="sub-aba-formulario" class="sub-aba-content">
+        <div class="card form-card">
+          <h2>📦 Cadastrar Novo Item no Sistema</h2>
+          <p class="form-subtitulo">
+            Preencha os dados abaixo para disponibilizar o produto no caixa
+            imediatamente.
+          </p>
+
+          <form id="form-cadastro-produto" autocomplete="off">
+            <div class="form-group">
+              <label for="novo-nome">Nome do Produto:</label>
+              <input
+                type="text"
+                id="novo-nome"
+                placeholder="Ex: Caderno Universitário 10 Matérias"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="novo-codigo"
+                >Código de Barras (ou Código Interno):</label
+              >
+              <input
+                type="text"
+                id="novo-codigo"
+                placeholder="Ex: 789000111"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="novo-preco">Preço de Venda (R$):</label>
+              <input
+                type="number"
+                id="novo-preco"
+                step="0.01"
+                min="0.01"
+                placeholder="R$ 0,00"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn-sucesso">Salvar Produto</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="sub-aba-estoque" class="sub-aba-content hidden">
+        <div class="card">
+          <h2>📋 Produtos Cadastrados no Estoque</h2>
+          <p class="form-subtitulo">
+            Gerencie, edite valores ou remova itens ativos do sistema.
+          </p>
+
+          <div class="tabela-container">
+            <table id="tabela-estoque">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Nome do Produto</th>
+                  <th>Preço Base</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="modal-custom" class="modal-overlay hidden">
+      <div class="modal-card-box">
+        <h3 id="modal-titulo">Título</h3>
+        <p id="modal-mensagem">Mensagem</p>
+
+        <div
+          id="modal-corpo-venda"
+          class="hidden"
+          style="
+            margin: 15px 0;
+            max-height: 220px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+          "
+        >
+          <table
+            style="font-size: 0.9em; width: 100%; border-collapse: collapse"
+          >
+            <thead style="background-color: #f8fafc; position: sticky; top: 0">
+              <tr>
+                <th style="padding: 10px; text-align: left; color: #64748b">
+                  Produto
+                </th>
+                <th
+                  style="
+                    padding: 10px;
+                    text-align: center;
+                    color: #64748b;
+                    width: 60px;
+                  "
+                >
+                  Qtd
+                </th>
+                <th
+                  style="
+                    padding: 10px;
+                    text-align: right;
+                    color: #64748b;
+                    width: 90px;
+                  "
+                >
+                  Total
+                </th>
+              </tr>
+            </thead>
+            <tbody id="modal-itens-linhas"></tbody>
+          </table>
+        </div>
+
+        <div id="modal-corpo-input" class="form-group hidden">
+          <input type="text" id="modal-input-texto" autocomplete="off" />
+        </div>
+
+        <div class="modal-botoes">
+          <button id="btn-modal-cancelar" class="btn-secundario">
+            Cancelar
+          </button>
+          <button id="btn-modal-confirmar" class="btn-sucesso">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
